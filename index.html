@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google Classroomi juhend</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --font-display: 'Google Sans', 'Inter', 'Segoe UI', Arial, sans-serif;
+      --font-body:    'Roboto', 'Inter', 'Segoe UI', Arial, sans-serif;
+      --font-mono:    'Roboto Mono', 'Consolas', monospace;
+      --blue:         #1B5E3B;
+      --blue-dark:    #134D2E;
+      --blue-light:   #E0EDE6;
+      --amber:        #A67B00;
+      --amber-light:  #FDF3D7;
+      --gray-900:     #1A1F1C;
+      --gray-700:     #3D4840;
+      --gray-500:     #6B7870;
+      --gray-200:     #D4DDD7;
+      --gray-100:     #F2F6F3;
+      --white:        #FDFAF5;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font-body); background: var(--gray-100); color: var(--gray-900); }
+
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .topbar-logo {
+      width: 40px; height: 40px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-family: var(--font-display); font-weight: 700; font-size: 18px;
+    }
+    .topbar-title { font-family: var(--font-display); font-size: 22px; color: var(--gray-900); }
+
+    .hero {
+      background: var(--blue);
+      color: var(--white);
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+    .hero h1 { font-family: var(--font-display); font-size: 28px; font-weight: 500; margin-bottom: 8px; }
+    .hero p { font-size: 16px; opacity: .9; }
+
+    .container { max-width: 680px; margin: 0 auto; padding: 24px 16px 48px; }
+
+    .card {
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .step-circle {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-header h2 { font-family: var(--font-display); font-size: 18px; font-weight: 500; }
+    .card-body { padding: 16px 24px 20px; }
+
+    ol.steps { padding-left: 0; list-style: none; counter-reset: steps; }
+    ol.steps li {
+      counter-increment: steps;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.5;
+    }
+    ol.steps li::before {
+      content: counter(steps);
+      background: var(--blue-light);
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 12px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .chip {
+      display: inline-block;
+      background: var(--blue-light);
+      color: var(--blue-dark);
+      border-radius: 4px;
+      padding: 1px 8px;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font-mono);
+    }
+    .chip-gold { background: var(--amber-light); color: var(--amber); }
+
+    .info-row {
+      background: var(--blue-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 14px;
+      color: var(--blue-dark);
+    }
+    .warn-row {
+      background: var(--amber-light);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      font-size: 14px;
+      color: var(--amber);
+    }
+
+    .ref-link {
+      display: block;
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--gray-200);
+    }
+    .ref-link a { color: var(--blue); text-decoration: none; }
+    .ref-link a:hover { text-decoration: underline; }
+
+    .code-box {
+      background: var(--gray-100);
+      border: 2px dashed var(--gray-200);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--gray-500);
+      text-align: center;
+      margin: 12px 0;
+    }
+
+    .submit-types { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+    .submit-type {
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .submit-type strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .submit-type p { font-size: 13px; color: var(--gray-500); }
+
+    .cal-row {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 14px;
+    }
+    .cal-row:last-child { border-bottom: none; }
+    .cal-row strong { display: block; margin-bottom: 2px; }
+    .cal-row p { color: var(--gray-500); font-size: 13px; }
+
+    .done-card {
+      background: var(--amber-light);
+      border-radius: 8px;
+      padding: 20px 24px;
+      text-align: center;
+    }
+    .done-card h3 { font-family: var(--font-display); font-size: 18px; color: var(--amber); }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: var(--gray-500);
+      padding: 16px;
+    }
+    footer a, .card a { color: var(--blue); text-decoration: none; }
+    footer a:hover, .card a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .topbar-title { font-size: 17px; }
+      .hero h1 { font-size: 22px; }
+      .card-body { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-logo">C</div>
+  <span class="topbar-title">Google Classroom — juhend osalejale</span>
+</div>
+
+<div class="hero">
+  <h1>Kuidas kasutada Google Classroomi</h1>
+  <p>Järgi alltoodud samme — see võtab umbes 5 minutit.</p>
+</div>
+
+<div class="container">
+
+  <!-- MOBIIL — enne kõike muud -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-circle" style="background:var(--gray-500)">M</div>
+      <h2>Kasutad mobiili?</h2>
+    </div>
+    <div class="card-body">
+      <p style="font-size:14px;color:var(--gray-700);margin-bottom:12px;">Laadi äpp alla enne alustamist — see on kiirem ja annab teavitusi.</p>
+      <ol class="steps">
+        <li>Laadi alla <strong>Google Classroom</strong> (App Store / Google Play)</li>
+        <li>Logi sisse sama Google'i kontoga</li>
+        <li>Kursus ilmub automaatselt pärast liitumist</li>
+      </ol>
+      <div class="info-row">
+        Brauseris: kõikides Google'i teenustes (Gmail, Drive jne) on paremas ülanurgas <strong>ruudustiku ikoon</strong> — sealt leiad Classroomi.
+      </div>
+      <p class="ref-link">Ametlik juhend: <a href="https://support.google.com/edu/classroom/answer/6072538" target="_blank">Google Classroomi äpp — Google tugi</a></p>
+    </div>
+  </div>
+
+  <!-- SAMM 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-circle">1</div>
+      <h2>Loo Google'i konto</h2>
+    </div>
+    <div class="card-body">
+      <div class="info-row">
+        Kui sul on juba gmail.com aadress — jäta see samm vahele ja mine sammu 2 juurde.
+      </div>
+      <ol class="steps">
+        <li>Mine aadressile <strong>accounts.google.com/signup</strong></li>
+        <li>Sisesta oma nimi</li>
+        <li>Vali kasutajanimi (nt eesnimi.perekonnanimi@gmail.com)</li>
+        <li>Vali parool ja kinnita see</li>
+        <li>Kinnita telefoninumbriga</li>
+      </ol>
+      <p class="ref-link">Ametlik juhend: <a href="https://support.google.com/accounts/answer/27441" target="_blank">Google konto loomine — Google tugi</a></p>
+    </div>
+  </div>
+
+  <!-- SAMM 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-circle">2</div>
+      <h2>Liitu kursusega</h2>
+    </div>
+    <div class="card-body">
+      <ol class="steps">
+        <li>Mine <strong>classroom.google.com</strong></li>
+        <li>Klõpsa <span class="chip">Logi sisse Google'iga</span></li>
+        <li>Klõpsa paremas ülanurgas <span class="chip">+</span> nupul</li>
+        <li>Vali <span class="chip">Join class</span></li>
+        <li>Sisesta liitumiskood, mille saatsime e-kirjaga:</li>
+      </ol>
+      <div class="code-box">Kood on saadetud e-kirjaga</div>
+      <div class="warn-row">
+        Koodi ei leia? Vaata rämpsposti kausta. Ikka ei leia — kirjuta <strong>kaja.loorens@hkhk.ee</strong>
+      </div>
+      <p class="ref-link">Ametlik juhend: <a href="https://support.google.com/edu/classroom/answer/6020273" target="_blank">Kursusega liitumine — Google tugi</a></p>
+    </div>
+  </div>
+
+  <!-- SAMM 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-circle">3</div>
+      <h2>Leia materjalid</h2>
+    </div>
+    <div class="card-body">
+      <ol class="steps">
+        <li>Ava kursus klõpsates selle pealkirjal</li>
+        <li>Klõpsa üleval <span class="chip">Classwork</span></li>
+        <li>Materjalid on jagatud teemade kaupa — klõpsa teema pealkirjal et avada</li>
+        <li>Slaidid ja juhendid avanevad uues aknas</li>
+      </ol>
+      <div class="info-row">
+        Materjalid ilmuvad jooksvalt — iga sessiooni eel lisame uue teema.
+      </div>
+      <p class="ref-link">Ametlik juhend: <a href="https://support.google.com/edu/classroom/answer/9123621" target="_blank">Materjalide vaatamine — Google tugi</a></p>
+    </div>
+  </div>
+
+  <!-- SAMM 4 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-circle">4</div>
+      <h2>Esita ülesanne ja küsi küsimusi</h2>
+    </div>
+    <div class="card-body">
+      <ol class="steps">
+        <li>Klõpsa <span class="chip">Classwork</span> → leia ülesanne</li>
+        <li>Ava ülesanne klõpsates pealkirjal</li>
+        <li>Loe juhend läbi</li>
+        <li>Lisa oma töö (vt allpool)</li>
+        <li>Klõpsa <span class="chip chip-gold">Turn in</span> ja kinnita</li>
+      </ol>
+
+      <div class="submit-types">
+        <div class="submit-type">
+          <strong>Screenshot või pilt</strong>
+          <p>Klõpsa <span class="chip">Add or create → File</span> → laadi pilt üles → Turn in</p>
+        </div>
+        <div class="submit-type">
+          <strong>Fail (PDF, dokument, konfifail)</strong>
+          <p>Klõpsa <span class="chip">Add or create → File</span> → laadi fail üles → Turn in</p>
+        </div>
+        <div class="submit-type">
+          <strong>Link</strong>
+          <p>Klõpsa <span class="chip">Add or create → Link</span> → kleebi link → Turn in</p>
+        </div>
+        <div class="submit-type">
+          <strong>Lugemis- või vaatamisülesanne</strong>
+          <p>Klõpsa <span class="chip">Mark as done</span> kui oled materjali läbinud</p>
+        </div>
+      </div>
+
+      <div class="info-row">
+        Ülesannetel võib olla näidatud <strong>100 punkti</strong> — ära muretse, seda koolitust ei hinnata punktidega. Oluline on et töö on <strong>esitatud</strong>.
+      </div>
+
+      <p style="font-size:14px;font-weight:500;color:var(--gray-900);margin:16px 0 8px;">Küsimused ülesande kohta</p>
+      <div class="submit-types">
+        <div class="submit-type">
+          <strong>Privaatne küsimus — ainult koolitaja näeb</strong>
+          <p>Ülesande all → <span class="chip">Add private comment</span></p>
+        </div>
+        <div class="submit-type">
+          <strong>Avalik küsimus — kõik osalejad näevad</strong>
+          <p>Ülesande all → <span class="chip">Class comments</span> väli</p>
+        </div>
+        <div class="submit-type">
+          <strong>Teadaanne kõigile — Stream</strong>
+          <p><span class="chip">Stream</span> sakk → <span class="chip">Share something with your class</span></p>
+        </div>
+      </div>
+
+      <p class="ref-link">
+        Ametlik juhend: <a href="https://support.google.com/edu/classroom/answer/6020285" target="_blank">Ülesande esitamine — Google tugi</a> ·
+        <a href="https://support.google.com/edu/classroom/answer/6020270" target="_blank">Kommentaarid — Google tugi</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- SAMM 5 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="step-circle">5</div>
+      <h2>Tähtajad ja teavitused</h2>
+    </div>
+    <div class="card-body">
+      <div class="cal-row">
+        <strong>Tähtajad ilmuvad automaatselt Google Calendaris</strong>
+        <p>Kui ülesandel on tähtaeg, näed seda kohe oma kalendris — ei pea midagi lisama.</p>
+      </div>
+      <div class="cal-row">
+        <strong>Lülita sisse teavitused</strong>
+        <p>Classroomis paremas ülanurgas kella ikoon → vali mis teavitusi soovid saada.</p>
+      </div>
+      <div class="cal-row">
+        <strong>Kõik esitamata ülesanded ühes kohas</strong>
+        <p>Classroomi avaleht → <span class="chip">To-do</span> — näed kõiki tähtaegu kõigilt kursustelt.</p>
+      </div>
+      <p class="ref-link">
+        Ametlik juhend: <a href="https://support.google.com/edu/classroom/answer/7184151" target="_blank">Kalendri kasutamine — Google tugi</a> ·
+        <a href="https://support.google.com/edu/classroom/answer/6141557" target="_blank">Teavitused — Google tugi</a>
+      </p>
+    </div>
+  </div>
+
+  <div class="done-card">
+    <h3>Oled valmis!</h3>
+  </div>
+
+</div>
+
+<footer>
+  <a href="https://hkhk.edu.ee">hkhk.edu.ee</a>
+</footer>
+
+</body>
+</html>
